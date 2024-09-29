@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa para Minha Namorada</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); /* Importa a fonte cursiva */
+
+        body {
+            font-family: 'Great Vibes', cursive; /* Fonte cursiva e romântica */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffc0cb; /* Fundo rosa */
+            color: #000; /* Texto preto */
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #000; /* Texto preto */
+        }
+
+        .slideshow {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+        }
+
+        .timer {
+            font-size: 24px;
+            color: #000; /* Texto preto */
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #000; /* Texto preto */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pra você sempre lembrar de nós.</h1>
+
+    <div class="slideshow">
+        <img src="foto1.jpg" alt="Foto 1" class="active">
+        <img src="foto2.jpg" alt="Foto 2">
+        <img src="foto3.jpg" alt="Foto 3">
+        <img src="foto4.jpg" alt="Foto 4">
+        <img src="foto5.jpg" alt="Foto 5">
+        <img src="foto6.jpg" alt="Foto 6">
+    </div>
+
+    <div class="timer" id="timer"></div>
+
+    <div class="message">
+        <p>Eu te amo muito, você é a mulher da minha vida. Cada segundo ao seu lado é um presente, e o tempo que passamos juntos só reforça o quanto eu te amo. Que a nossa história continue crescendo, e que eu possa passar a eternidade, onde sempre encontrei meu lugar.</p>
+    </div>
+
+    <script>
+        // Função do contador
+        function startTimer() {
+            const startDate = new Date('2020-04-04T18:40:00'); // Data de início do relacionamento
+            setInterval(function() {
+                const now = new Date();
+                const timeDiff = now - startDate;
+
+                const years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365));
+                const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').innerHTML = 
+                    years + ' anos ' + days + ' dias ' + hours + ' horas ' + minutes + ' minutos ' + seconds + ' segundos';
+            }, 1000);
+        }
+
+        // Função do slideshow
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.querySelectorAll('.slideshow img');
+            slides.forEach((slide, index) => {
+                slide.style.opacity = '0';
+            });
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.opacity = '1';
+            setTimeout(showSlides, 3000); // Mudar imagem a cada 3 segundos
+        }
+
+        // Iniciar as funções
+        window.onload = function() {
+            startTimer();
+            showSlides();
+        };
+    </script>
+
+</body>
+</html>
